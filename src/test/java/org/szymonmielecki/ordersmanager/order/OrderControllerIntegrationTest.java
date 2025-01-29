@@ -142,12 +142,12 @@ class OrderControllerIntegrationTest {
                 )
         );
 
-        OrderUpdateDTO orderUpdateDTO = new OrderUpdateDTO("IN_PROCESSING", null);
+        OrderDTO update = new OrderDTO(null, "IN_PROCESSING", null, null, null);
         ObjectMapper mapper = new ObjectMapper();
 
         mvc.perform(put("/order/{id}", orderModel.getId())
                         .contentType(MediaType.APPLICATION_JSON).content(
-                                mapper.writeValueAsBytes(orderUpdateDTO)
+                                mapper.writeValueAsBytes(update)
                         ))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)).andExpect(

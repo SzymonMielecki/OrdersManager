@@ -4,9 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.szymonmielecki.ordersmanager.order.OrderMapper;
+import org.szymonmielecki.ordersmanager.order.OrderMapperImpl;
 import org.szymonmielecki.ordersmanager.order.OrderServiceImpl;
 import org.szymonmielecki.ordersmanager.order.OrderStatus;
 import org.szymonmielecki.ordersmanager.product.ProductService;
@@ -27,11 +31,9 @@ class ProductOrderServiceUnitTest {
     @Mock
     private OrderServiceImpl orderService;
 
-    @Spy
-    private OrderMapper orderMapper;
-
     @BeforeEach
     void setUp() {
+        OrderMapper orderMapper = new OrderMapperImpl();
         productOrderService = new ProductOrderService(orderMapper, productService, orderService);
     }
 
