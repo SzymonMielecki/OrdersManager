@@ -24,8 +24,6 @@ class ProductOrderServiceUnitTest {
     private ArgumentCaptor<String> idCaptor;
     @Captor
     private ArgumentCaptor<String> nameCaptor;
-    @Captor
-    private ArgumentCaptor<OrderStatus> statusCaptor;
     @Mock
     private ProductService productService;
     @Mock

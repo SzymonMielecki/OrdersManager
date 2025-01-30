@@ -25,8 +25,6 @@ class OrderServiceImplUnitTest {
 
     @Captor
     private ArgumentCaptor<String> idCaptor;
-    @Captor
-    private ArgumentCaptor<OrderStatus> statusCaptor;
 
     @Mock
     private OrderRepository orderRepository;
