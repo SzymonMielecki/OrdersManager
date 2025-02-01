@@ -15,7 +15,7 @@ import org.szymonmielecki.ordersmanager.order.OrderServiceImpl;
 import org.szymonmielecki.ordersmanager.order.OrderStatus;
 import org.szymonmielecki.ordersmanager.product.ProductService;
 
-import java.util.Optional;
+import java.util.HashMap;
 
 @ExtendWith(MockitoExtension.class)
 class ProductOrderServiceUnitTest {
@@ -63,7 +63,9 @@ class ProductOrderServiceUnitTest {
 
     @Test
     void testGetOrdersByStatus() {
-        productOrderService.getOrdersByFilters(Optional.of(OrderStatus.NEW), Optional.empty());
-        Mockito.verify(orderService).getOrders();
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("status", OrderStatus.NEW);
+        productOrderService.getOrders(filters);
+        Mockito.verify(orderService).getOrders(filters);
     }
 }

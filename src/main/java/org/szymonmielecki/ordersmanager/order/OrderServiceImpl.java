@@ -6,6 +6,7 @@ import org.szymonmielecki.ordersmanager.product.ProductModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -49,8 +50,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderModel> getOrders() {
-        return orderRepository.findAll();
+    public List<OrderModel> getOrders(Map<String, Object> filters) {
+        return orderRepository.findAll(OrderUtil.withFilters(filters));
     }
 
     @Override

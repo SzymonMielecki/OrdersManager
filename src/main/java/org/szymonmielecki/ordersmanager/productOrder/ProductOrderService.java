@@ -4,14 +4,12 @@ import org.springframework.stereotype.Service;
 import org.szymonmielecki.ordersmanager.order.OrderDTO;
 import org.szymonmielecki.ordersmanager.order.OrderMapper;
 import org.szymonmielecki.ordersmanager.order.OrderService;
-import org.szymonmielecki.ordersmanager.order.OrderStatus;
 import org.szymonmielecki.ordersmanager.product.ProductModel;
 import org.szymonmielecki.ordersmanager.product.ProductService;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,10 +47,8 @@ public class ProductOrderService {
         orderService.deleteOrder(id);
     }
 
-    public List<OrderDTO> getOrdersByFilters(Optional<OrderStatus> status, Optional<LocalDateTime> date) {
-        return orderService.getOrders().stream()
-                .filter(order -> status.map(s -> order.getStatus() == s).orElse(true))
-                .filter(order -> date.map(d -> order.getCreationDate().isAfter(d)).orElse(true))
+    public List<OrderDTO> getOrders(Map<String, Object> filters) {
+        return orderService.getOrders(filters).stream()
                 .map(
                         orderMapper::orderModelToDTO
                 ).toList();

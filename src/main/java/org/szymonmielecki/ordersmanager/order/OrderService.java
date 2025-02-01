@@ -3,6 +3,7 @@ package org.szymonmielecki.ordersmanager.order;
 import org.szymonmielecki.ordersmanager.product.ProductModel;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 public interface OrderService {
@@ -12,7 +13,7 @@ public interface OrderService {
 
     void deleteOrder(String id) throws NoSuchElementException;
 
-    List<OrderModel> getOrders();
+    List<OrderModel> getOrders(Map<String, Object> filters);
 
     OrderModel updateOrder(String id, OrderModel update) throws NoSuchElementException;
 }

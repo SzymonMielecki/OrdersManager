@@ -9,10 +9,12 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.jpa.domain.Specification;
 import org.szymonmielecki.ordersmanager.product.ProductModel;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,8 +94,11 @@ class OrderServiceImplUnitTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void testGetOrdersByStatus() {
-        orderService.getOrders();
-        Mockito.verify(orderRepository).findAll();
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("status", OrderStatus.NEW);
+        orderService.getOrders(filters);
+        Mockito.verify(orderRepository).findAll(any(Specification.class));
     }
 }

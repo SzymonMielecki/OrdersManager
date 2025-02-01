@@ -4,10 +4,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.szymonmielecki.ordersmanager.productOrder.ProductOrderService;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/order")
@@ -58,7 +57,7 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderDTO> getAll(@RequestParam("status") Optional<OrderStatus> status, @RequestParam("creation_date") Optional<LocalDateTime> date) {
-        return productOrderService.getOrdersByFilters(status, date);
+    public List<OrderDTO> getAll(@RequestParam Map<String, Object> allRequestParams) {
+        return productOrderService.getOrders(allRequestParams);
     }
 }
