@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderUtil {
-    public static Specification<OrderModel> withFilters(Map<String, Object> filters) {
+    public static <T> Specification<T> withFilters(Map<String, Object> filters) {
         return (root, query, cb) -> {
 
             List<Predicate> predicates = new ArrayList<>();
